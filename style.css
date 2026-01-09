@@ -1,45 +1,44 @@
-/* --- Base Styles --- */
-body {
-  font: 1.1em sans-serif; /* Slightly smaller base font for mobile-first */
+/* 1. Reset and Global Styles */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-* {
-  box-sizing: border-box;
+body {
+  font: 1.1rem sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden; /* Prevents side-scrolling */
 }
 
-/* Fix: Images should be responsive, not fixed 300x200 */
+/* 2. Responsive Images - THE FIX */
 img {
-  max-width: 100%;
-  height: auto;
   display: block;
+  max-width: 100%; /* Image will never be wider than its container */
+  height: auto;    /* Maintains aspect ratio */
+  margin: 0 auto;
 }
 
-/* Fix: Grid columns need to change on mobile */
+/* 3. Responsive Grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 15px;
+  padding: 15px;
 }
 
-/* Fix: Removed fixed width 950px; used max-width instead */
+/* 4. The "Definition" Box Fix */
 .defn {
-  width: 100%;
-  max-width: 950px;
-  min-height: 200px; /* Allow height to grow if text is long */
+  width: 95%;      /* Responsive width */
+  max-width: 950px; /* Limits size on desktop */
+  margin: 20px auto;
   border: 3px solid rgb(142, 127, 127);
-  margin: 10px auto;
+  padding: 10px;
+  height: auto;    /* Allow height to expand for text */
+  min-height: 200px;
 }
 
-p {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-}
-
-/* --- Navbar Fixes --- */
+/* 5. Navigation Bar */
 .navbar {
   background-color: #562a38d2;
   display: flex;
@@ -47,32 +46,22 @@ p {
   justify-content: center;
 }
 
-.navbar a {
-  font-size: 16px;
+.navbar a, .dropbtn {
   color: white;
-  text-align: center;
-  padding: 15px 20px; /* Reduced the massive 145px padding */
   text-decoration: none;
-  font-style: oblique;
-}
-
-.dropdown {
-  display: flex;
-}
-
-.dropdown .dropbtn {
+  padding: 14px 20px;
+  text-align: center;
   font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 15px 20px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: rgb(37, 90, 99);
+}
+
+/* Dropdown logic */
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown-content {
@@ -80,52 +69,38 @@ p {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 100;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 10;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.det {
-  display: flex;
-  flex-wrap: wrap;
-  font-family: "Helvetica";
-  border-bottom: 2px solid #333;
-  padding: 10px;
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  display: block;
+  text-align: left;
 }
 
-/* --- RESPONSIVE MEDIA QUERY --- */
-/* This kicks in for Tablets and Phones */
-@media screen and (max-width: 768px) {
-  
-  /* Stack the grid items vertically */
-  .grid {
-    grid-template-columns: 1fr; 
-  }
+/* 6. Text Styles */
+p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
 
-  /* Make the navbar links take up more space or stack */
-  .navbar a, .dropdown .dropbtn {
-    flex: 1 1 45%; /* Two items per row on mobile */
-    padding: 15px 10px;
-    font-size: 14px;
-  }
+.det {
+  display: flex;
+  flex-direction: column; /* Stack vertically by default for mobile */
+  padding: 15px;
+  border-bottom: 2px solid #333;
+}
 
-  .defn {
-    height: auto; /* Let content determine height on small screens */
-    width: 95%;
-  }
-
-  p {
-    font-size: 1.1rem;
+/* Desktop Adjustment for .det */
+@media (min-width: 768px) {
+  .det {
+    flex-direction: row; /* Side-by-side on desktop */
   }
 }
