@@ -5,6 +5,8 @@ body {
     box-sizing: border-box;
   }
   img {
+    display:flex;
+    flex-wrap: wrap ;
     width: 300px;
     height: 200px;
   }
@@ -32,6 +34,8 @@ body {
     overflow: hidden;
     background-color: #562a38d2;
     font-family: Arial;
+    display:flex;
+    flex-wrap: wrap ;
   }
   
   /* Links inside the navbar */
@@ -49,6 +53,8 @@ body {
   .dropdown {
     float: left;
     overflow: hidden;
+    display:flex;
+    flex-wrap: wrap ;
   }
   
   /* Dropdown button */
@@ -98,6 +104,8 @@ body {
     display: block;
   }
   .det{
+    display:flex;
+    flex-wrap: wrap ;
     font-family: "Helvetica";
     border-bottom: 2px solid #333;
   }
