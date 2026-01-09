@@ -1,4 +1,4 @@
-/* 1. Reset and Global Styles */
+/* 1. Global Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,62 +6,59 @@
 }
 
 body {
-  font: 1.1rem sans-serif;
-  line-height: 1.5;
-  overflow-x: hidden; /* Prevents side-scrolling */
+  font: 1.1em sans-serif;
+  line-height: 1.6;
+  background-color: #fff;
+  color: #333;
 }
 
-/* 2. Responsive Images - THE FIX */
-img {
-  display: block;
-  max-width: 100%; /* Image will never be wider than its container */
-  height: auto;    /* Maintains aspect ratio */
-  margin: 0 auto;
+/* 2. Responsive Containers (The Fix for Overlapping) */
+.defn {
+  width: 90%;            /* Uses percentage for mobile */
+  max-width: 950px;      /* Stops growing at 950px on desktop */
+  margin: 20px auto;
+  border: 3px solid rgb(142, 127, 127);
+  padding: 15px;
+  height: auto;          /* CRITICAL: Removed fixed 200px height */
+  min-height: 100px;     /* Sets a minimum, but allows growth */
 }
 
 /* 3. Responsive Grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  /* Magic line: stacks automatically on mobile, 3 columns on desktop */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 15px;
   padding: 15px;
 }
 
-/* 4. The "Definition" Box Fix */
-.defn {
-  width: 95%;      /* Responsive width */
-  max-width: 950px; /* Limits size on desktop */
-  margin: 20px auto;
-  border: 3px solid rgb(142, 127, 127);
-  padding: 10px;
-  height: auto;    /* Allow height to expand for text */
-  min-height: 200px;
+/* 4. Responsive Images */
+img {
+  max-width: 100%;       /* Prevents image from being wider than its container */
+  height: auto;          /* Keeps aspect ratio */
+  display: block;
+  margin: 10px auto;
 }
 
-/* 5. Navigation Bar */
+/* 5. Navbar (Simplified for Mobile) */
 .navbar {
   background-color: #562a38d2;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;       /* Allows links to wrap to next line if needed */
   justify-content: center;
 }
 
 .navbar a, .dropbtn {
   color: white;
   text-decoration: none;
-  padding: 14px 20px;
-  text-align: center;
+  padding: 15px;         /* Removed 145px padding which was breaking mobile */
   font-size: 16px;
+  text-align: center;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: rgb(37, 90, 99);
-}
-
-/* Dropdown logic */
+/* Dropdown basics */
 .dropdown {
   position: relative;
-  display: inline-block;
 }
 
 .dropdown-content {
@@ -70,37 +67,31 @@ img {
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 10;
+  z-index: 100;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  display: block;
-  text-align: left;
-}
-
-/* 6. Text Styles */
+/* 6. Typography */
 p {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.2rem;
-  padding: 0.5rem;
+  font-size: 1.3rem;
+  padding: 10px;
+  word-wrap: break-word; /* Prevents long words from breaking layout */
 }
 
 .det {
   display: flex;
-  flex-direction: column; /* Stack vertically by default for mobile */
-  padding: 15px;
+  flex-direction: column; /* Stack vertically for mobile */
   border-bottom: 2px solid #333;
+  padding: 15px;
 }
 
-/* Desktop Adjustment for .det */
+/* Desktop override for the 'det' section */
 @media (min-width: 768px) {
   .det {
-    flex-direction: row; /* Side-by-side on desktop */
+    flex-direction: row; /* Side-by-side on large screens */
   }
 }
