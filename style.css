@@ -35,39 +35,54 @@ body {
     text-align: center;
 }
 
-/* 3. Navbar - Fixed the huge padding and floating */
+/* --- Navbar: Equal Distribution Fix --- */
 .navbar {
-    background-color: #562a38;
+    background-color: #562a38d2;
     display: flex;
-    justify-content: center; /* Centers the links */
-    flex-wrap: wrap;
+    justify-content: space-evenly; /* This spreads items across the whole bar */
+    align-items: center;
+    flex-wrap: wrap; 
+    width: 100%;
 }
 
 .navbar a, .dropbtn {
     color: white;
     text-decoration: none;
-    padding: 15px 25px;
+    padding: 15px 10px; /* Smaller horizontal padding */
     font-size: 16px;
+    flex: 1;            /* This forces each item to take equal width */
+    text-align: center;
     border: none;
     background: none;
-    cursor: pointer;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #255a63;
+/* --- Content: Overlapping Text Fix --- */
+.det {
+    display: block;       /* Change from flex to block to stop column splitting */
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;    /* Centers the block on the screen */
+    text-align: center;
+    line-height: 1.8;     /* Improves readability */
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
 }
 
-.dropdown { position: relative; }
+/* Ensure the bold "At BookGig" doesn't float weirdly */
+.det b {
+    display: inline;
+}
+
+/* --- Dropdown Mobile Fix --- */
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 200px;
+    min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 100;
+    top: 100%; /* Ensures it appears below the bar */
 }
-.dropdown:hover .dropdown-content { display: block; }
-.dropdown-content a { color: black !important; text-align: left; }
 
 /* 4. Main Content Fix - Stopping the overlap seen in screenshot */
 .content-container {
@@ -103,3 +118,4 @@ body {
         font-size: 1.2rem;
     }
 }
+
