@@ -1,129 +1,131 @@
+/* --- Base Styles --- */
 body {
-    font: 1.2em sans-serif;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  img {
-    display:flex;
-    flex-wrap: wrap ;
-    width: 300px;
-    height: 200px;
-  }
-  
-  .grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+  font: 1.1em sans-serif; /* Slightly smaller base font for mobile-first */
+  margin: 0;
+  padding: 0;
+}
 
-  }
-  .defn{
-    width: 950px;
-    height: 200px;
-    border: 3px solid rgb(142, 127, 127);
+* {
+  box-sizing: border-box;
+}
 
-  }
-  p{
-    font-family: 'Dancing Script', cursive;
-    font-display: block;
-    font-size: x-large;
-    padding:0.5rem;
-  }
-  /* Navbar container */
+/* Fix: Images should be responsive, not fixed 300x200 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fix: Grid columns need to change on mobile */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+/* Fix: Removed fixed width 950px; used max-width instead */
+.defn {
+  width: 100%;
+  max-width: 950px;
+  min-height: 200px; /* Allow height to grow if text is long */
+  border: 3px solid rgb(142, 127, 127);
+  margin: 10px auto;
+}
+
+p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+/* --- Navbar Fixes --- */
 .navbar {
-    overflow: hidden;
-    background-color: #562a38d2;
-    font-family: Arial;
-    display:flex;
-    flex-wrap: wrap ;
-  }
-  
-  /* Links inside the navbar */
-  .navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 12px 145px;
-    font-style:oblique;
-    
-  }
-  
-  /* The dropdown container */
-  .dropdown {
-    float: left;
-    overflow: hidden;
-    display:flex;
-    flex-wrap: wrap ;
-  }
-  
-  /* Dropdown button */
-  .dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
-  }
-  
-  /* Add a red background color to navbar links on hover */
-  .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: rgb(37, 90, 99);
-  }
-  
-  /* Dropdown content (hidden by default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  /* Add a grey background color to dropdown links on hover */
-  .dropdown-content a:hover {
-    background-color: #ddd;
-  }
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  .det{
-    display:flex;
-    flex-wrap: wrap ;
-    font-family: "Helvetica";
-    border-bottom: 2px solid #333;
-  }
-  .TM{
-    font-size: small;
-    font-family: "Helvetica";
-    text-align: center;
-}
-.book-title {
-    border-bottom: 3px solid transparent; /* Hidden by default */
-    transition: 0.3s; /* Smooths the color change */
-    text-align: center;
-    background-color: rgb(204, 222, 175);
+  background-color: #562a38d2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.book-title:hover {
-    border-bottom: 3px solid #3498db; /* Blue appears on hover */
+.navbar a {
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 15px 20px; /* Reduced the massive 145px padding */
+  text-decoration: none;
+  font-style: oblique;
 }
-.SM{
-    text-align: center;
+
+.dropdown {
+  display: flex;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 15px 20px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(37, 90, 99);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.det {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: "Helvetica";
+  border-bottom: 2px solid #333;
+  padding: 10px;
+}
+
+/* --- RESPONSIVE MEDIA QUERY --- */
+/* This kicks in for Tablets and Phones */
+@media screen and (max-width: 768px) {
+  
+  /* Stack the grid items vertically */
+  .grid {
+    grid-template-columns: 1fr; 
+  }
+
+  /* Make the navbar links take up more space or stack */
+  .navbar a, .dropdown .dropbtn {
+    flex: 1 1 45%; /* Two items per row on mobile */
+    padding: 15px 10px;
+    font-size: 14px;
+  }
+
+  .defn {
+    height: auto; /* Let content determine height on small screens */
+    width: 95%;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
 }
