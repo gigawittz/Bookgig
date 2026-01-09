@@ -1,131 +1,105 @@
-/* 1. Global Reset */
+/* 1. Reset and Layout Basics */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font: 1.1em sans-serif;
-  line-height: 1.6;
-  background-color: #fff;
-  color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
 }
 
-/* 2. Responsive Containers (The Fix for Overlapping) */
+/* 2. Header Section - Logo and Title side-by-side */
+.header-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.logo-box img {
+    max-width: 150px;
+    height: auto;
+}
+
 .defn {
-  width: 90%;            /* Uses percentage for mobile */
-  max-width: 950px;      /* Stops growing at 950px on desktop */
-  margin: 20px auto;
-  border: 3px solid rgb(142, 127, 127);
-  padding: 15px;
-  height: auto;          /* CRITICAL: Removed fixed 200px height */
-  min-height: 100px;     /* Sets a minimum, but allows growth */
+    flex: 1;
+    min-width: 300px;
+    max-width: 800px;
+    border: 3px solid #8e7f7f;
+    padding: 20px;
+    text-align: center;
 }
 
-/* 3. Responsive Grid */
-.grid {
-  display: grid;
-  /* Magic line: stacks automatically on mobile, 3 columns on desktop */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 15px;
-  padding: 15px;
-}
-
-/* 4. Responsive Images */
-img {
-  max-width: 100%;       /* Prevents image from being wider than its container */
-  height: auto;          /* Keeps aspect ratio */
-  display: block;
-  margin: 10px auto;
-}
-
-/* Navbar Container - Uses Flexbox instead of Floats */
+/* 3. Navbar - Fixed the huge padding and floating */
 .navbar {
-  background-color: #562a38d2;
-  display: flex;
-  flex-wrap: wrap; /* Allows items to wrap to a new line on small screens */
-  justify-content: center;
-  width: 100%;
+    background-color: #562a38;
+    display: flex;
+    justify-content: center; /* Centers the links */
+    flex-wrap: wrap;
 }
 
-/* Links inside the navbar */
 .navbar a, .dropbtn {
-  color: white;
-  text-decoration: none;
-  padding: 15px 20px; /* Reduced from 145px to fit mobile */
-  font-size: 16px;
-  text-align: center;
-  display: block;
-  font-family: Arial, sans-serif;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-/* The dropdown container */
-.dropdown {
-  position: relative; /* Keep the menu attached to the button */
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 200px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 1000; /* Ensure it stays on top of other content */
-  top: 100%; /* Positions it exactly below the button */
-  left: 0;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black !important;
-  padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: rgb(37, 90, 99);
+    background-color: #255a63;
 }
 
-/* Mobile Tweak: Stack the navbar links vertically on very small screens */
-@media screen and (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-  }
-  .dropdown-content {
-    position: static; /* Makes the menu push content down instead of floating over it */
-    width: 100%;
-  }
+.dropdown { position: relative; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 100;
 }
-/* 6. Typography */
-p {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.3rem;
-  padding: 10px;
-  word-wrap: break-word; /* Prevents long words from breaking layout */
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content a { color: black !important; text-align: left; }
+
+/* 4. Main Content Fix - Stopping the overlap seen in screenshot */
+.content-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-.det {
-  display: flex;
-  flex-direction: column; /* Stack vertically for mobile */
-  border-bottom: 2px solid #333;
-  padding: 15px;
+.welcome-text {
+    text-align: center;
 }
 
-/* Desktop override for the 'det' section */
-@media (min-width: 768px) {
-  .det {
-    flex-direction: row; /* Side-by-side on large screens */
-  }
+.welcome-text p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    word-wrap: break-word; /* Crucial for long words */
 }
 
+/* 5. Footer */
+.footer {
+    border-top: 2px solid #333;
+    padding: 20px;
+    text-align: center;
+}
+
+/* --- MOBILE TWEAKS --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack navbar links on phones */
+    }
+    .welcome-text p {
+        font-size: 1.2rem;
+    }
+}
